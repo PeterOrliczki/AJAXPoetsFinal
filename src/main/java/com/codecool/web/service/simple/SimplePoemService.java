@@ -3,7 +3,6 @@ package com.codecool.web.service.simple;
 import com.codecool.web.dao.PoemDao;
 import com.codecool.web.model.Poem;
 import com.codecool.web.service.PoemService;
-import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -22,16 +21,8 @@ public final class SimplePoemService implements PoemService {
     }
 
     @Override
-    public Poem findContentByUserId(String id) throws SQLException, ServiceException {
-        try {
-            return poemDao.findContentByUserId(Integer.parseInt(id));
-        } catch (IllegalArgumentException ex) {
-            throw new ServiceException(ex.getMessage());
-        }
+    public Poem findPoemByTitle(String title) throws SQLException {
+        return poemDao.findPoemByTitle(title);
     }
 
-    @Override
-    public Poem findAllByTitle(String title) throws SQLException {
-        return poemDao.findAllByTitle(title);
-    }
 }

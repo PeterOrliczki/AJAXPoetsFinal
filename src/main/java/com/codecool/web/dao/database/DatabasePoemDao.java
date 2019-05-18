@@ -32,24 +32,10 @@ public final class DatabasePoemDao extends AbstractDao implements PoemDao {
     }
 
     @Override
-    public Poem findAllByTitle(String title) throws SQLException {
+    public Poem findPoemByTitle(String title) throws SQLException {
         String sql = "SELECT id, user_id, title, content FROM poems WHERE title = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, title);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return fetchPoem(resultSet);
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Poem findContentByUserId(int userId) throws SQLException {
-        String sql = "SELECT id, title, content FROM poems WHERE user_id = ?;";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, userId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return fetchPoem(resultSet);
