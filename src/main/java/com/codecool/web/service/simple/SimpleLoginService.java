@@ -16,9 +16,9 @@ public final class SimpleLoginService implements LoginService {
     }
 
     @Override
-    public User loginUser(String email, String password) throws SQLException, ServiceException {
+    public User loginUser(String name, String password) throws SQLException, ServiceException {
         try {
-            User user = userDao.findByEmail(email);
+            User user = userDao.findByName(name);
             if (user == null || !user.getPassword().equals(password)) {
                 throw new ServiceException("Bad login");
             }
