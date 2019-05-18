@@ -23,10 +23,10 @@ public final class LoginServlet extends AbstractServlet {
             UserDao userDao = new DatabaseUserDao(connection);
             LoginService loginService = new SimpleLoginService(userDao);
 
-            String email = req.getParameter("email");
+            String name = req.getParameter("name");
             String password = req.getParameter("password");
 
-            User user = loginService.loginUser(email, password);
+            User user = loginService.loginUser(name, password);
             req.getSession().setAttribute("user", user);
 
             sendMessage(resp, HttpServletResponse.SC_OK, user);
